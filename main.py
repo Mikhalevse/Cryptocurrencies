@@ -66,7 +66,6 @@ cryptocurrencies = {}
 # }
 
 
-
 cryptocurrencies_for_cmb = []
 
 
@@ -76,7 +75,7 @@ set_cryptocurrencies_names_for_cmb()
 
 window = Tk()
 window.title("Курсы криптовалют")
-window.geometry("400x100")
+window.geometry("500x100")
 
 # configure the grid
 window.columnconfigure(0, weight=4)
@@ -84,11 +83,11 @@ window.columnconfigure(1, weight=1)
 window.columnconfigure(2, weight=4)
 
 
-lbl_cryptocurrency = Label(window, text="Криптовалюта")
-lbl_cryptocurrency.grid(column=0, row=0, pady=3)
+lbl_cryptocurrency = Label(window, text="Криптовалюта (базовая валюта)")
+lbl_cryptocurrency.grid(column=0, row=0, padx=8, pady=3, sticky=W)
 
-lbl_vs_currency = Label(window, text="Валюта")
-lbl_vs_currency.grid(column=2, row=0, pady=3)
+lbl_vs_currency = Label(window, text="Валюта котировки")
+lbl_vs_currency.grid(column=2, row=0, padx=8, pady=3, sticky=W)
 
 cmb_cryptocurrency = ttk.Combobox(window, width=40, values=cryptocurrencies_for_cmb)
 cmb_cryptocurrency.grid(column=0, row=1, padx=10, pady=4)
