@@ -7,6 +7,18 @@ from tkinter import ttk
 
 p = pprint.PrettyPrinter(indent=4)  # indent=4 - значит отступ в 4 пробела
 
+endpoint = {
+    # Позволяет запрашивать все поддерживаемые монеты с указанием цены.
+    # vs_currency - код поддерживаемой валюты
+    "coins/markets": "https://api.coingecko.com/api/v3/coins/markets",
+    # Позволяет запрашивать все поддерживаемые валюты
+    "simple/supported_vs_currencies": "https://api.coingecko.com/api/v3/simple/supported_vs_currencies",
+    # Позволяет запрашивать цену одной или нескольких монет, используя их уникальные идентификаторы
+    # ids - идентификатор(ы) криптовалюты, разделенные запятой.
+    # vs_currencies - код(ы) поддерживаемых валют
+    "simple/price": "https://api.coingecko.com/api/v3/simple/price",
+}
+
 
 # id:name
 currency = {
