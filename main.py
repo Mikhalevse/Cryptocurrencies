@@ -107,10 +107,10 @@ window.columnconfigure(1, weight=1)
 window.columnconfigure(2, weight=4)
 
 # Виджеты (элементы управления)
-lbl_cryptocurrency = Label(window, text="Криптовалюта (базовая валюта)")
+lbl_cryptocurrency = Label(window, text=f"Базовая криптовалюта ({len(cryptocurrencies)} шт.)")
 lbl_cryptocurrency.grid(column=0, row=0, padx=8, pady=3, sticky=W)
 
-lbl_vs_currency = Label(window, text="Валюта котировки")
+lbl_vs_currency = Label(window, text=f"Валюта котировки ({len(vs_currencies)} шт.)")
 lbl_vs_currency.grid(column=2, row=0, padx=8, pady=3, sticky=W)
 
 cmb_cryptocurrency = ttk.Combobox(window, width=40, values=sorted(cryptocurrencies))
