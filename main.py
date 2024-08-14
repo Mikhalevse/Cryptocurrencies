@@ -4,7 +4,6 @@ from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import ttk
 
-
 p = pprint.PrettyPrinter(indent=4)  # indent=4 - значит отступ в 4 пробела
 
 endpoint = {
@@ -29,49 +28,46 @@ def get_coins_markets():
     global cryptocurrencies
     try:
         url = endpoint["coins/list"]
-        # params = dict(vs_currency="usd", locale="ru")
-        # response = requests.get(url, params=params)
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
-
-        p.pprint(len(data))
-
         if data:
             for c in data:
                 cryptocurrencies[c["id"]] = dict(name=c["name"], symbol=c["symbol"])
-
     except Exception as e:
         mb.showerror("Ошибка", f"Произошла ошибка: {e}")
-    pass
 
 
 def set_cryptocurrencies_names_for_cmb():
     global cryptocurrencies_for_cmb
-
     for v in cryptocurrencies.values():
         cryptocurrencies_for_cmb.append(f'{v['name']} [{v['symbol']}]')
-
-    sorted(cryptocurrencies_for_cmb)
-
-    p.pprint(cryptocurrencies_for_cmb)
-    pass
+    cryptocurrencies_for_cmb = sorted(cryptocurrencies_for_cmb)
 
 
-# id:name
-cryptocurrencies = {}
-#     'solana':   dict(name='Солана',     symbol="sln"),
-#     'bitcoin':  dict(name='Биткоин',    symbol="btc"),
-#     'ethereum': dict(name='Эфириум',    symbol="eth"),
-# }
-
-
+cryptocurrencies = {}  # 'solana':   dict(name='Солана',     symbol="sln"),
 cryptocurrencies_for_cmb = []
 
+vs_currencies_for_cmb = [
+    'Bitcoin [BTC]',
+    'Ethereum [ETH]',
+    'Litecoin [LTC]',
+    'Доллар США [USD]',
+    'Дирхам ОАЭ [AED]',
+    'Канадский доллар [CAD]',
+    'Швейцарский франк [CHF]',
+    'Китайский юань [CNY]',
+    'Чешская крона [CZK]',
+    'Евро [EUR]',
+    'Фунт стерлингов [GBP]',
+    'Японская йена [JPY]',
+    'Российский рубль [RUB]',
+    'Вьетнамский донг [VND]'
+]
+vs_currencies_for_cmb = sorted(vs_currencies_for_cmb)
 
 get_coins_markets()
 set_cryptocurrencies_names_for_cmb()
-
 
 window = Tk()
 window.title("Курсы криптовалют")
@@ -81,7 +77,6 @@ window.geometry("500x100")
 window.columnconfigure(0, weight=4)
 window.columnconfigure(1, weight=1)
 window.columnconfigure(2, weight=4)
-
 
 lbl_cryptocurrency = Label(window, text="Криптовалюта (базовая валюта)")
 lbl_cryptocurrency.grid(column=0, row=0, padx=8, pady=3, sticky=W)
@@ -95,16 +90,10 @@ cmb_cryptocurrency.grid(column=0, row=1, padx=10, pady=4)
 lbl_arrows = Label(window, width=2, text="⇄", font=("Calibre", 18))
 lbl_arrows.grid(column=1, row=1, padx=5)
 
-cmb_vs_currency = ttk.Combobox(window, width=40, values=cryptocurrencies_for_cmb)
+cmb_vs_currency = ttk.Combobox(window, width=40, values=vs_currencies_for_cmb)
 cmb_vs_currency.grid(column=2, row=1, padx=10, pady=4)
 
 btn_get_rate = Button(window, text="Получить курс обмена")
 btn_get_rate.grid(column=0, row=2, padx=10, pady=5, columnspan=3, sticky=NSEW)
-
-
-
-
-
-
 
 window.mainloop()
